@@ -1,6 +1,6 @@
 <div class="container mat-elevation-z8">
   <form class="form">
-    <h1 class="fullWidth">Criar Técnico</h1>
+    <h1 class="fullWidth">Atualizar Técnico</h1>
     <img
       class="fullWidth"
       src="assets/img/tecnico-create.svg"
@@ -84,14 +84,14 @@
       mat-flat-button
       color="primary"
       [disabled]="!validaCampos()"
-      (click)="create()"
+      (click)="update()"
     >
       <mat-icon>save</mat-icon>
-      <span>Cadastrar</span>
+      <span>Atualizar</span>
     </button>
 
     <button
-      routerLink="../"
+      routerLink="../../"
       class="fullWidth mat-elevation-z4"
       mat-stroked-button
       color="warn"
