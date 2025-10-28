@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Tecnico } from '../../../models/tecnico';
 
 @Component({
   selector: 'app-tecnico-create',
@@ -6,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./tecnico-create.component.css']
 })
 export class TecnicoCreateComponent {
+tecnico: any;
 
 }
