@@ -10,7 +10,6 @@ export class NavComponent {
    constructor(private router: Router) {}
 
    ngOnInit(): void {
-      //this.router.navigate(['home']);
-      this.router.navigate(['login']);
+      this.router.navigate(['home']);
    }
 }
