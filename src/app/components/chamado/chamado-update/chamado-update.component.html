@@ -1,0 +1,118 @@
+<div class="container mat-elevation-z8">
+  <h1 class="fullWidth">Alterando Chamado</h1>
+  <img
+    class="fullWidth"
+    src="assets/img/chamado-create.svg"
+    alt="Help Desk - Dicas de um DEV"
+  />
+
+  <form class="form">
+    <mat-form-field class="fullWidth" appearance="outline">
+      <mat-label>Título</mat-label>
+      <input
+        matInput
+        [formControl]="titulo"
+        name="titulo"
+        [(ngModel)]="chamado.titulo"
+        required
+        name="titulo"
+        placeholder="Ex.. Trocar Bateria de notebook"
+      />
+    </mat-form-field>
+
+    <div class="status-prioridade">
+      <mat-form-field appearance="outline">
+        <mat-label>Selecione um status</mat-label>
+        <mat-select
+          [(ngModel)]="chamado.status"
+          name="status"
+          [formControl]="status"
+          required
+        >
+          <mat-option value="0">ABERTO</mat-option>
+          <mat-option value="1">ANDAMENTO</mat-option>
+          <mat-option value="2">ENCERRADO</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Selecione uma prioridade</mat-label>
+        <mat-select
+          [(ngModel)]="chamado.prioridade"
+          name="prioridade"
+          [formControl]="prioridade"
+          required
+        >
+          <mat-option value="0">BAIXA</mat-option>
+          <mat-option value="1">MÉDIA</mat-option>
+          <mat-option value="2">ALTA</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="tecnico">
+      <mat-form-field class="fullWidth" appearance="outline">
+        <mat-label>Selecione um técnico</mat-label>
+        <mat-select
+          [(ngModel)]="chamado.tecnico"
+          name="tecnico"
+          [formControl]="tecnico"
+          required
+        >
+          <mat-option *ngFor="let tec of tecnicos" value="{{ tec.id }}">{{
+            tec.nome
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="cliente">
+      <mat-form-field class="fullWidth" appearance="outline">
+        <mat-label>Selecione um cliente</mat-label>
+        <mat-select
+          [(ngModel)]="chamado.cliente"
+          name="cliente"
+          [formControl]="cliente"
+          required
+        >
+          <mat-option *ngFor="let cli of clientes" value="{{ cli.id }}">{{
+            cli.nome
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <mat-form-field class="fullWidth descricao" appearance="fill">
+      <mat-label>Deixe uma observação</mat-label>
+      <textarea
+        matInput
+        [(ngModel)]="chamado.observacoes"
+        name="observacoes"
+        [formControl]="observacoes"
+        required
+        placeholder="Ex. Trocar bateria de notebook queimada..."
+      ></textarea>
+    </mat-form-field>
+
+    <button
+      [disabled]="!validaCampos()"
+      (click)="create()"
+      class="fullWidth mat-elevation-z4"
+      mat-raised-button
+      color="primary"
+    >
+      Criar Chamado
+    </button>
+
+    <button
+      routerLink="../"
+      class="fullWidth mat-elevation-z4"
+      mat-stroked-button
+      color="warn"
+    >
+      Cancelar
+    </button>
+
+    <p class="fullWidth">Desenvolvido por Lucas Campos</p>
+  </form>
+</div>
