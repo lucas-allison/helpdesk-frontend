@@ -7,7 +7,7 @@ import { TecnicoService } from '../../../services/tecnicos/tecnico.service';
 import { ChamadoService } from '../../../services/chamados/chamado.service';
 import { Chamado } from '../../../models/chamado';
 import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-chamado-update',
@@ -41,18 +41,32 @@ export class ChamadoUpdateComponent implements OnInit {
     private clienteService: ClienteService,
     private tecnicoService: TecnicoService,
     private toast: ToastrService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
+    this.chamado.id = this.route.snapshot.paramMap.get('id')!;
+    this.findById();
     this.findAllClientes();
     this.findAllTecnicos();
   }
 
-  create(): void {
-    this.chamadoService.create(this.chamado).subscribe({
+  findById(): void {
+    this.chamadoService.findById(this.chamado.id).subscribe((resposta) => {
+      this.chamado = resposta;
+    }, ex => {
+      this.toast.error(ex.error.error);
+    });
+  }
+
+  update(): void {
+    this.chamadoService.update(this.chamado).subscribe({
       next: () => {
-        this.toast.success('Chamado criado com sucesso', 'Novo Chamado');
+        this.toast.success(
+          'Chamado atualizado com sucesso',
+          'Atualização de Chamado'
+        );
         this.router.navigate(['chamados']);
       },
       error: (ex) => {
@@ -88,5 +102,27 @@ export class ChamadoUpdateComponent implements OnInit {
       this.tecnico.valid &&
       this.cliente.valid
     );
+  }
+
+  retornaStatus(status: any): string {
+    switch (status) {
+      case 1:
+        return 'EM ANDAMENTO';
+      case 2:
+        return 'ENCERRADO';
+      default:
+        return 'ABERTO';
+    }
+  }
+
+  retornaPrioridade(prioridade: any): string {
+    switch (prioridade) {
+      case 1:
+        return 'MÉDIA';
+      case 2:
+        return 'ALTA';
+      default:
+        return 'BAIXA';
+    }
   }
 }

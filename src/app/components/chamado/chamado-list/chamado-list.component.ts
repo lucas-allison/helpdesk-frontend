@@ -19,8 +19,8 @@ export class ChamadoListComponent {
     'cliente',
     'tecnico',
     'dataAbertura',
-    'prioridade',
     'status',
+    'prioridade',
     'acoes',
   ];
 
@@ -48,7 +48,7 @@ export class ChamadoListComponent {
   retornaStatus(status: any): string {
     switch (status) {
       case 1:
-        return 'ANDAMENTO';
+        return 'EM ANDAMENTO';
       case 2:
         return 'ENCERRADO';
       default:
