@@ -1,0 +1,36 @@
+.container {
+  width: 90%;
+  margin: auto;
+}
+
+table,
+mat-form-field,
+button,
+h1 {
+  width: 100%;
+}
+
+button {
+  margin-bottom: 15px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.edit {
+  color: rgb(0, 153, 255);
+  cursor: pointer;
+}
+
+.delete {
+  color: red;
+  cursor: pointer;
+}
+
+mat-radio-group {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
