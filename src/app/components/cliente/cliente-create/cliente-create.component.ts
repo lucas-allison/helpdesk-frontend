@@ -1,17 +1,17 @@
 import { Component } from '@angular/core';
-import { Tecnico } from '../../../models/tecnico';
+import { Cliente } from '../../../models/cliente';
 import { FormControl, Validators } from '@angular/forms';
-import { TecnicoService } from '../../../services/tecnicos/tecnico.service';
+import { ClienteService } from '../../../services/clientes/cliente.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-tecnico-create',
-  templateUrl: './tecnico-create.component.html',
-  styleUrls: ['./tecnico-create.component.css'],
+  selector: 'app-cliente-create',
+  templateUrl: './cliente-create.component.html',
+  styleUrls: ['./cliente-create.component.css'],
 })
-export class TecnicoCreateComponent {
-  tecnico: Tecnico = {
+export class ClienteCreateComponent {
+  cliente: Cliente = {
     id: '',
     nome: '',
     cpf: '',
@@ -27,16 +27,18 @@ export class TecnicoCreateComponent {
   senha: FormControl = new FormControl(null, Validators.minLength(3));
 
   constructor(
-    private service: TecnicoService,
+    private service: ClienteService,
     private toast: ToastrService,
     private router: Router
-  ) {}
+  ) {
+    this.cliente.perfis = ['1'];
+  }
 
   create(): void {
-    this.service.create(this.tecnico).subscribe({
+    this.service.create(this.cliente).subscribe({
       next: () => {
-        this.toast.success('Técnico criado com sucesso', 'Cadastro');
-        this.router.navigate(['tecnicos']);
+        this.toast.success('Cliente criado com sucesso', 'Cadastro');
+        this.router.navigate(['clientes']);
       },
       error: (ex) => {
         if (ex.error.errors) {
@@ -48,12 +50,6 @@ export class TecnicoCreateComponent {
         } else this.toast.error(ex.error.message);
       },
     });
-  }
-
-  addPerfil(perfil: any): void {
-    if (this.tecnico.perfis.includes(perfil))
-      this.tecnico.perfis.splice(this.tecnico.perfis.indexOf(perfil), 1);
-    else this.tecnico.perfis.push(perfil);
   }
 
   validaCampos(): boolean {

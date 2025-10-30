@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Credenciais } from '../../models/credenciais';
 import { FormControl, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../services/auth/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,7 +10,6 @@ import { Router } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
-
 export class LoginComponent {
   creds: Credenciais = {
     email: '',
@@ -35,13 +34,11 @@ export class LoginComponent {
           this.toast.info('Login realizado com sucesso');
           this.service.successFullLogin(token.substring(7));
           this.router.navigate(['']);
-        }
-        else
-          this.toast.error('Usuário e/ou senha inválidos');
+        } else this.toast.error('Usuário e/ou senha inválidos');
       },
       error: () => {
         this.toast.error('Erro ao realizar login');
-      }
+      },
     });
   }
 

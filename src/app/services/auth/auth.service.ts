@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Credenciais } from '../models/credenciais';
+import { Credenciais } from '../../models/credenciais';
 import { HttpClient } from '@angular/common/http';
-import { API_CONFIG } from '../config/api.config';
+import { API_CONFIG } from '../../config/api.config';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
